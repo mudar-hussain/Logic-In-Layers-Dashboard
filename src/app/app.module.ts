@@ -1,5 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+
+
+import { AngularFireModule } from '@angular/fire/compat';
+import { FirestoreModule } from '@angular/fire/firestore';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +16,7 @@ import { CreatePostComponent } from './posts/create-post/create-post.component';
 import { AllPostComponent } from './posts/all-post/all-post.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SubscribersComponent } from './subscribers/subscribers.component';
+import { environment } from 'src/environments/environment.prod';
 
 @NgModule({
   declarations: [
@@ -26,7 +32,10 @@ import { SubscribersComponent } from './subscribers/subscribers.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    FirestoreModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
