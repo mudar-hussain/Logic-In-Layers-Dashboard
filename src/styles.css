@@ -2,6 +2,7 @@
 
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import "~ngx-toastr/toastr";
 
 
 :root {
@@ -13,7 +14,7 @@
 
 body {
     font-family: "Roboto", sans-serif;
-    font-size: 12px;
+    font-size: 14px;
     color: var(--body-text-color);
 }
 
@@ -48,7 +49,6 @@ body {
 input[type = text], input[type = email] {
     height: 40px;
     padding-left: 20px;
-    font-size: 14px;
     width: 100%;
 }
 
