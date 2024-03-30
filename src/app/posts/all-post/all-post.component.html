@@ -1,1 +1,56 @@
-<p>all-post works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow-effect bg-secondary-theme">
+                <div class="card-body text-center">
+                    <h3 class="text-theme-center"> All Blog Posts </h3>
+                    <p> From here you can manage your blog posts. </p>
+
+                    <button class="btn btn-info bg-theme" routerLink="/posts/create"> Create Post </button>
+                    <button class="btn btn-warning ml-2" routerLink="/"> Back to Dashboard </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow-effect">
+                <div class="card-body">
+                    <table class="table row-border hover" style="max-width: 100%;">
+                        <thead>
+                            <tr>
+                                <th class="col-md-1"> No </th>
+                                <th class="col-md-2"> Post Image </th>
+                                <th class="col-md-2"> Title </th>
+                                <th class="col-md-1"> Category </th>
+                                <th class="col-md-1"> Date </th>
+                                <th class="col-md-2"> Actions </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr *ngFor = "let post of postList | async; let i = index">
+                                <td class="col-md-1"> {{ i+1 }}</td>
+                                <td class="col-md-2"> <img src="{{post.postImgPath}}" alt="{{this.postImgPlaceHolder}}" class="img img-fluid"></td>
+                                <td class="col-md-2 text-cell"> {{post.title}}</td>
+                                <td class="col-md-1 text-cell"> {{post.category.category}}</td>
+                                <td class="col-md-1 text-cell"> {{post.createdAt.toMillis() | date }}</td>
+                                <td class="col-md-2">
+                                    <button class="btn btn-sm btn-warning" routerLink="/posts/create" [queryParams]="{id: post.id}"> Edit </button>
+                                    <button class="btn btn-sm btn-danger ml-2" (click)="deletePost(post.id, post.postImgPath)"> Delete </button>
+                                    <button class="btn btn-sm btn-success ml-2" (click)="updatePostFeatured(post.id, post.isFeatured)">
+                                        <i [class]="post.isFeatured ? 'fas fa-star' : 'far fa-star'"></i>
+                                    </button> 
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

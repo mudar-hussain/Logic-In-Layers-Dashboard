@@ -8,4 +8,5 @@ export const environment = {
     messagingSenderId: '848515052978',
     appId: '1:848515052978:web:6f7a91eefbad53937820ab',
   },
+  defaultPostImgPath : 'postImg/placeholder-image.png'
 };

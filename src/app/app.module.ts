@@ -5,10 +5,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
+import { getAuth, provideAuth } from '@angular/fire/auth';
 
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AngularEditorModule, AngularEditorService } from '@kolkov/angular-editor';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -49,7 +50,8 @@ import { HttpClientModule } from '@angular/common/http';
     importProvidersFrom(
       provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
       provideFirestore(() => getFirestore()),
-      provideStorage(() => getStorage())
+      provideStorage(() => getStorage()),
+      provideAuth(() => getAuth())
     )
   ],
   bootstrap: [AppComponent]

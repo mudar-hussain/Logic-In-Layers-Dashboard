@@ -1,1 +1,186 @@
-<p>create-post works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h3 class="text-theme-primary">{{this.formStatus}} Post</h3>
+      <p class="mb-5">You can {{this.formStatus == 'Create'? 'create new' : 'edit existing' }} post here</p>
+    </div>
+  </div>
+
+  <form action="" [formGroup]="createPostForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md-7">
+        <div class="card shadow-effect">
+          <div class="card-body">
+            <div class="form-group">
+              <label for=""> Title * </label>
+              <input
+                type="text"
+                class="form-control"
+                (keyup)="updatePermalink($event)"
+                formControlName="title"
+                [ngClass]="{
+                  'is-invalid':
+                    createPostFormControls['title'].touched &&
+                    createPostFormControls['title'].invalid
+                }"
+              />
+              <div *ngIf="createPostFormControls['title'].errors?.['required']">
+                <div
+                  class="alert alert-danger"
+                  *ngIf="
+                    createPostFormControls['title'].touched &&
+                    createPostFormControls['title'].invalid
+                  "
+                >
+                  Title is required
+                </div>
+              </div>
+              <div
+                *ngIf="createPostFormControls['title'].errors?.['minlength']"
+              >
+                <div
+                  class="alert alert-danger"
+                  *ngIf="
+                    createPostFormControls['title'].touched &&
+                    createPostFormControls['title'].invalid
+                  "
+                >
+                  Title must be atleast 10 characters long.
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for=""> Permalink </label>
+              <input
+                type="text"
+                class="form-control"
+                name="permalink"
+                [(ngModel)]="this.permalink"
+                formControlName="permalink"
+              />
+            </div>
+            <div class="form-group">
+              <label for=""> Excerpt </label>
+              <textarea
+                cols="30"
+                rows="10"
+                class="form-control"
+                formControlName="excerpt"
+                [ngClass]="{
+                  'is-invalid':
+                    createPostFormControls['excerpt'].touched &&
+                    createPostFormControls['excerpt'].invalid
+                }"
+              ></textarea>
+              <div
+                *ngIf="createPostFormControls['excerpt'].errors?.['required']"
+              >
+                <div
+                  class="alert alert-danger"
+                  *ngIf="
+                    createPostFormControls['excerpt'].touched &&
+                    createPostFormControls['excerpt'].invalid
+                  "
+                >
+                  Excerpt is required
+                </div>
+              </div>
+              <div
+                *ngIf="createPostFormControls['excerpt'].errors?.['minlength']"
+              >
+                <div
+                  class="alert alert-danger"
+                  *ngIf="
+                    createPostFormControls['excerpt'].touched &&
+                    createPostFormControls['excerpt'].invalid
+                  "
+                >
+                  Excerpt must be atleast 50 characters long.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-5">
+        <div class="form-group">
+          <label for=""> Please select a post category </label>
+          <select
+            class="form-control"
+            formControlName="category"
+            [ngClass]="{
+              'is-invalid':
+                createPostFormControls['category'].touched &&
+                createPostFormControls['category'].invalid
+            }"
+          >
+            <option value="" disabled>Please select a category</option>
+            <option *ngFor="let data of categoryList | async" value="{{data.id}}~#~{{data.category}}">
+              {{ data.category }}
+            </option>
+          </select>
+          <div *ngIf="createPostFormControls['category'].errors?.['required']">
+            <div
+              class="alert alert-danger"
+              *ngIf="
+                createPostFormControls['category'].touched &&
+                createPostFormControls['category'].invalid
+              "
+            >
+              Post category is required
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for=""> Post Image </label>
+          <img [src]="imgSrc" class="form-control img-fluid img-preview" />
+          <input
+            type="file"
+            class="form-control"
+            accept="image/*"
+            (change)="showImgPreview($event)"
+            formControlName="postImg"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-3 mb-5">
+      <div class="col-md-12">
+        <div class="card shadow-effect">
+          <div class="card-body">
+            <div class="form-group">
+              <label for=""> Content </label>
+              <angular-editor
+                placeholder="Add your content here..."
+                formControlName="content"
+              ></angular-editor>
+              <div
+                *ngIf="createPostFormControls['content'].errors?.['required']"
+              >
+                <div
+                  class="alert alert-danger"
+                  *ngIf="
+                    createPostFormControls['content'].touched &&
+                    createPostFormControls['content'].invalid
+                  "
+                >
+                  Content is required
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12 text-center mb-5 mt-5">
+        <Button class="btn btn-info bg-theme" [disabled]="this.createPostForm.invalid"> {{this.formStatus}} Post </Button>
+        <Button class="btn btn-warning ml-3" (click)="resetPostCreateForm()" routerLink="/posts">
+          Cancel
+        </Button>
+      </div>
+    </div>
+  </form>
+</div>
