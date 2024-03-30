@@ -2,4 +2,11 @@
     <div class="container justify-content-center">
         <a href="#" class="site-logo"> Tech Tonic Tales </a>
     </div>
+
+    <div class="container justify-content-center" *ngIf="isLoggedIn$ | async">
+        <a href="#" class="mr-3"> {{userData.email}} </a>
+        <button class="btn btn-sm btn-info bg-secondary-theme text-theme-primary" (click)="logout()">
+            Logout
+        </button>
+    </div>
 </header>
