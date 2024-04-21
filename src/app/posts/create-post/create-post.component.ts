@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Timestamp } from '@angular/fire/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -116,7 +117,7 @@ export class CreatePostComponent implements OnInit {
         isFeatured: false,
         views: 0,
         status: 'New',
-        createdAt: new Date(),
+        createdAt: Timestamp.fromDate(new Date()),
       };
       console.log('create PostData: ', postData);
       this.postService.addPost(postData);

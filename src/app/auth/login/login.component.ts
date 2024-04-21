@@ -13,4 +13,5 @@ export class LoginComponent {
   onSubmit(formValue: any){
     this.authService.login(formValue.email, formValue.password);
   }
+  
 }
