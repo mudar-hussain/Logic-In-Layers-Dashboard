@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, doc, documentId, query, where, getFirestore, getDoc, updateDoc, deleteDoc } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, doc, getFirestore, getDoc, updateDoc, deleteDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import {
   Storage,
