@@ -34,7 +34,7 @@ import { HttpClientModule } from '@angular/common/http';
     CreatePostComponent,
     AllPostComponent,
     LoginComponent,
-    SubscribersComponent
+    SubscribersComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +44,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     AngularEditorModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     importProvidersFrom(
@@ -52,8 +52,8 @@ import { HttpClientModule } from '@angular/common/http';
       provideFirestore(() => getFirestore()),
       provideStorage(() => getStorage()),
       provideAuth(() => getAuth())
-    )
+    ),
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

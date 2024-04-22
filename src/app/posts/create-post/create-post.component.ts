@@ -28,9 +28,9 @@ export class CreatePostComponent implements OnInit {
     private postService: PostsService,
     private route: ActivatedRoute
   ) {
-    this.route.queryParams.subscribe(val => {
+    this.route.queryParams.subscribe((val) => {
       this.editPostId = val['id'] || '';
-    })
+    });
 
     this.createPostForm = new FormGroup({
       title: new FormControl('', [
@@ -53,16 +53,21 @@ export class CreatePostComponent implements OnInit {
 
   ngOnInit(): void {
     this.categoryList = this.categoryService.getCategories();
-    if(this.editPostId?.length != 0){
+    if (this.editPostId?.length != 0) {
       this.formStatus = 'Edit';
-      this.postService.getPostById(this.editPostId).then(val => {
+      this.postService.getPostById(this.editPostId).then((val) => {
         this.editPostForm = val.data();
-        console.log(val.data());
         this.createPostForm.get('title')?.setValue(this.editPostForm.title);
-        this.createPostForm.get('permalink')?.setValue(this.editPostForm.permalink);
+        this.createPostForm
+          .get('permalink')
+          ?.setValue(this.editPostForm.permalink);
         this.permalink = this.editPostForm.title.trim().replace(/\s/g, '-');
         this.createPostForm.get('excerpt')?.setValue(this.editPostForm.excerpt);
-        this.createPostForm.get('category')?.setValue(`${this.editPostForm.category.categoryId}~#~${this.editPostForm.category.category}`);
+        this.createPostForm
+          .get('category')
+          ?.setValue(
+            `${this.editPostForm.category.categoryId}~#~${this.editPostForm.category.category}`
+          );
         this.imgSrc = this.editPostForm.postImgPath;
         this.selectedImg = null;
         this.createPostForm.get('content')?.setValue(this.editPostForm.content);
@@ -70,8 +75,6 @@ export class CreatePostComponent implements OnInit {
     } else {
       this.deleteImg();
     }
-    
-    
   }
 
   updatePermalink(event: any) {
@@ -92,8 +95,8 @@ export class CreatePostComponent implements OnInit {
     return this.createPostForm.controls;
   }
 
-  onSubmit(){
-    if(this.formStatus == 'Create'){
+  onSubmit() {
+    if (this.formStatus == 'Create') {
       this.createPost();
     } else {
       this.updatePost();
@@ -119,13 +122,12 @@ export class CreatePostComponent implements OnInit {
         status: 'New',
         createdAt: Timestamp.fromDate(new Date()),
       };
-      console.log('create PostData: ', postData);
       this.postService.addPost(postData);
       this.resetPostCreateForm();
     });
   }
 
-  updatePost(){
+  updatePost() {
     const categoryData = this.createPostForm.value.category.split('~#~');
     const postData: Post = {
       title: this.createPostForm.value.title,
@@ -142,19 +144,16 @@ export class CreatePostComponent implements OnInit {
       status: 'Edited',
       createdAt: this.editPostForm.createdAt,
     };
-    if(this.selectedImg != null){
+    if (this.selectedImg != null) {
       this.postService.uploadFile(this.selectedImg).then((postImgUrl) => {
-        console.log("postImgURL: ", postImgUrl);
         postData.postImgPath = postImgUrl;
-        console.log('Edit & new img PostData: ', postData);
         this.postService.updatePost(this.editPostId, postData);
       });
     } else {
       postData.postImgPath = this.editPostForm.postImgPath;
-      console.log('Edit & old img PostData: ', postData);
       this.postService.updatePost(this.editPostId, postData);
     }
-    
+
     this.resetPostCreateForm();
   }
 

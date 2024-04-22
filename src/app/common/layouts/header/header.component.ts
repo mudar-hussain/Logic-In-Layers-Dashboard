@@ -8,15 +8,14 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-
   userData: any = '';
   isLoggedIn$: Observable<boolean> | undefined;
 
-  constructor(private authService: AuthService){}
+  constructor(private authService: AuthService) {}
   ngOnInit(): void {
     const user = sessionStorage.getItem('user');
     if (user) this.userData = JSON.parse(user);
-    
+
     this.isLoggedIn$ = this.authService.isLoggedIn();
   }
 

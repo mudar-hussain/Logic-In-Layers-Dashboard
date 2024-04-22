@@ -5,10 +5,10 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-subscribers',
   templateUrl: './subscribers.component.html',
-  styleUrls: ['./subscribers.component.css']
+  styleUrls: ['./subscribers.component.css'],
 })
-export class SubscribersComponent implements OnInit{
-  subscribersList!: Observable<any>
+export class SubscribersComponent implements OnInit {
+  subscribersList!: Observable<any>;
 
   constructor(private subscriberService: SubscribersService) {}
 
@@ -16,8 +16,7 @@ export class SubscribersComponent implements OnInit{
     this.subscribersList = this.subscriberService.getSubscribers();
   }
 
-  deleteSubscriber(subsId: string){
+  deleteSubscriber(subsId: string) {
     this.subscriberService.deleteSubscriber(subsId);
   }
-
 }

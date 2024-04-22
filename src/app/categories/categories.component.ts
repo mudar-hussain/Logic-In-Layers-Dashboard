@@ -42,10 +42,6 @@ export class CategoriesComponent implements OnInit {
     }
   }
 
-  updateCategory(updatedCategory: string) {
-    console.log('Updated category:', updatedCategory);
-  }
-
   deleteCategory(id: string) {
     this.categoryService.deleteCategory(id);
   }

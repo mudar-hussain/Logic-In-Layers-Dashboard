@@ -1,1 +1,11 @@
-{}
+{
+  "hosting": {
+    "target": "Tech_Tonic_Tales_Dashboard",
+    "public": "dist/Tech_Tonic_Tales_Dashboard",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
