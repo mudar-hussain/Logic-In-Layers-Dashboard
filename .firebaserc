@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "logicinlayers"
+  },
+  "targets": {
+    "logicinlayers": {
+      "hosting": {
+        "logic-in-layers-dashboard": [
+          "logicinlayers-admin"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
