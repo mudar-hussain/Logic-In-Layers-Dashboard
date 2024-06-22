@@ -7,3 +7,15 @@ input[type = text] {
     display: inline-flex;
     align-items: center;
 }
+
+input[type = text] {
+    width: 300px;
+}
+
+.btn-theme {
+    height: 40px;
+    width: auto;
+    border: none;
+    font-size: 15px;
+    background-color: var(--primary-color);
+}

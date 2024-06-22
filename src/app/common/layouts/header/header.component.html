@@ -1,12 +1,41 @@
-<header class="navbar navbar-expand-lg fixed-top bg-white shadow-effect">
+<!-- <header class="navbar navbar-expand-lg fixed-top bg-white shadow-effect">
     <div class="container justify-content-center">
-        <a href="#" class="site-logo"> Tech Tonic Tales </a>
+        <a href="#" class="site-name"> Logic In Layers </a>
     </div>
 
     <div class="container justify-content-center" *ngIf="isLoggedIn$ | async">
-        <a href="#" class="mr-3"> {{userData.email}} </a>
+        <a *ngIf="isWindow" href="#" class="mr-3"> {{userData.email}} </a>
         <button class="btn btn-sm btn-info bg-secondary-theme text-theme-primary" (click)="logout()">
-            Logout
+            {{isWindow ? 'Logout' : 'L'}}
         </button>
+    </div>
+</header> -->
+
+<header class="fixed-top bg-white shadow-effect">
+    <div [ngClass]="{'centered-row': !isWindow, 'row': isWindow}">
+        <div [ngClass]="{'container left': isWindow}">
+            <a routerLink="/" class="btn">
+                <img src="../../../../assets/img/logo.png" alt="Logic In Layers" style="width: 80px; height: 80px;">
+            </a>
+
+        </div>
+        <div [ngClass]="{'container middle': isWindow}">
+            <a target="_blank" [href]="this.newsletterUrl" class="site-name"> Logic In Layers </a>
+        </div>
+        <div class="container right">
+            <ng-container *ngIf="isLoggedIn$ | async">
+                <a *ngIf="isWindow" href="#"> {{userData.email}} </a>
+                <button class="btn btn-theme-connect ml-2" (click)="logout()">
+                    <span><i class="fas fa-sign-out-alt"></i></span>
+                </button>
+            </ng-container>
+            <ng-container *ngIf="!(isLoggedIn$ | async)">
+                <a target="_blank" href="http://localhost:4200/">
+                    <button class="btn btn-theme-connect ml-2">
+                        <span><i class="far fa-newspaper"></i> Blogs</span>
+                    </button>
+                </a>
+            </ng-container>
+        </div>
     </div>
 </header>

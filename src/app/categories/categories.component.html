@@ -1,33 +1,23 @@
-<div class="container">
+<div class="container mb-5">
   <div class="row">
-    <div class="col-md-12 bg-secondary-theme p-5 shadow-effect">
+    <div class="col-md-12 bg-secondary-theme p-5 shadow-effect  text-center">
       <h3 class="text-center text-theme-primary">Add Categories</h3>
-      <p class="text-center mb-5">You can add new categories from here ..!</p>
+      <p class="text-center">You can add new categories from here...</p>
+      <button class="btn btn-warning ml-2 mb-5" routerLink="/"> Back to Dashboard </button>
 
-      <form
-        novalidate
-        class="form-inline text-center"
-        [formGroup]="categoryForm"
-        (ngSubmit)="addCategory()"
-      >
-        <div class="form-group col-md-10">
-          <input
-            type="text"
-            class="form-control shadow-effect"
-            placeholder="Add New Categories"
-            formControlName = 'category'
-            required
-          />
-            <div class="form-control-feedback"
-           *ngIf="this.categoryForm.get('category')?.errors && (this.categoryForm.get('category')?.dirty || this.categoryForm.get('category')?.touched)">
-        <p *ngIf="this.categoryForm.get('category')?.invalid">Category field is required</p>
-      </div>
-        </div>
+      <form novalidate class="form-inline text-center justify-content-center" [formGroup]="categoryForm" (ngSubmit)="addCategory()">
+        <div class="input-group">
+          <div class="form-group">
+            <input type="text" class="form-control shadow-effect" placeholder="Add New Categories"
+              formControlName='category' required />
 
-        <div class="col-md-2">
-          <button class="btn btn-block btn-info mb-2 btn-theme" [disabled]="categoryForm.invalid">
-            Add Category
-          </button>
+          </div>
+
+          <div class="input-group-append">
+            <button class="btn btn-block btn-info btn-theme" [disabled]="categoryForm.invalid">
+              Add Category
+            </button>
+          </div>
         </div>
       </form>
     </div>
@@ -38,44 +28,44 @@
     <div class="col-md-2"></div>
 
     <div class="col-md-8">
-        <div class="card shadow-effect">
-            <div class="card-body">
-                <table class="table row-border hover">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Category</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor = "let data of categoryList | async; let i = index">
-                            <td class="col-md-1"> {{i+1}} </td>
-                            <td class="text-left col-md-3"> 
-                                <ng-container *ngIf="editCategoryIndex !== i+1; else editMode">
-                                    {{ data.category }}
-                                </ng-container>
-                                <ng-template #editMode>
-                                    <input type="text" class="form-control" [(ngModel)]="data.category" 
-                                    value={{data.category}} required>
-                                </ng-template>
-                            </td>
-                            <td class="col-md-4">
-                                <button class="btn btn-sm btn-warning" (click)="onEdit(data.id, data.category, i+1)">
-                                    {{ this.editCategoryIndex == i+1 ? 'Update': 'Edit' }}
-                                </button>
-                                <button class="btn btn-sm btn-danger ml-2" (click)="deleteCategory(data.id)">
-                                    Delete
-                                </button>
-                                <button class="btn btn-sm btn-info ml-2" *ngIf = "this.editCategoryIndex == i+1" (click)="cancelEdit()">
-                                    Cancel
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+      <div class="card shadow-effect">
+        <div class="card-body">
+          <table class="table row-border hover">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Category</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of categoryList | async; let i = index">
+                <td class="col-md-1"> {{i+1}} </td>
+                <td class="text-left col-md-3">
+                  <ng-container *ngIf="editCategoryIndex !== i+1; else editMode">
+                    {{ data.category }}
+                  </ng-container>
+                  <ng-template #editMode>
+                    <input type="text" class="form-control" [(ngModel)]="data.category" value={{data.category}}
+                      required>
+                  </ng-template>
+                </td>
+                <td class="col-md-4">
+                  <button class="btn btn-sm btn-warning" (click)="onEdit(data.id, data.category, i+1)">
+                    {{ this.editCategoryIndex == i+1 ? 'Update': 'Edit' }}
+                  </button>
+                  <button class="btn btn-sm btn-danger ml-2" (click)="deleteCategory(data.id)">
+                    Delete
+                  </button>
+                  <button class="btn btn-sm btn-info ml-2" *ngIf="this.editCategoryIndex == i+1" (click)="cancelEdit()">
+                    Cancel
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+      </div>
     </div>
 
     <div class="col-md-2"></div>

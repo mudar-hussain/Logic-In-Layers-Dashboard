@@ -1,7 +1,7 @@
 {
   "hosting": {
-    "target": "Tech_Tonic_Tales_Dashboard",
-    "public": "dist/Tech_Tonic_Tales_Dashboard",
+    "target": "logic-in-layers-dashboard",
+    "public": "dist/logic-in-layers-dashboard",
     "ignore": [
       "firebase.json",
       "**/.*",

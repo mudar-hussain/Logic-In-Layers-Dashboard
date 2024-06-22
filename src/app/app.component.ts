@@ -7,5 +7,5 @@ import { Firestore } from '@angular/fire/firestore';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent{
-  title = 'Tech_Tonic_Tales_Dashboard';
+  title = 'Logic_In_Layers_Dashboard';
 }

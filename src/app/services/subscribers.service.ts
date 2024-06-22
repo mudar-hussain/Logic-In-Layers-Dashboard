@@ -7,6 +7,7 @@ import {
   doc,
 } from '@angular/fire/firestore';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
